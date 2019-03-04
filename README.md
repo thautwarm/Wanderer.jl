@@ -21,11 +21,11 @@ df = DataSource |>
        @groupby _."a + b + c" / _.a => key,
        @having key != 4.5,
        @orderby _.a |> length,
-       @select sum.(_."a + b + c") => sum, _.key => key
+       @select sum(_."a + b + c") => sum, _.key => key
 ```
 outputs:
 ```julia
 Dict{Symbol,Array{T,1} where T} with 2 entries:
   :key => [6.0, 4.0]
-  :sum => Array{Int64,1}[[6], [12, 16]]
+  :sum => [6, 28]
 ```
