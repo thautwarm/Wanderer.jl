@@ -6,7 +6,6 @@ include("ConstantNames.jl")
 include("DynamicInfer.jl")
 include("Interfaces.jl")
 include("MacroProcessors.jl")
-include("Impl.jl")
-
+include("Implementation.jl")
 
 end # module
