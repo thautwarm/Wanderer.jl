@@ -30,8 +30,14 @@ for i = 1:CONST_FIELD_NUM
     @eval @inline type_unpack(n::Int, ::$inp) where {$(types...)} = $out
 end
 
+
+
 function type_unpack(n :: Int, ::Type{T}) where T <: Tuple
-    collect(T.parameters)
+    if T === Base.Bottom
+        type_unpack(n, Any)
+    else
+        collect(T.parameters)
+    end
 end
 
 function type_unpack(n::Int, :: Type{Tuple{}})

@@ -1,32 +1,32 @@
-MQuerySymbol(x...) = Symbol(join(["MQuery", x...], "."))
+WandererSymbol(x...) = Symbol(join(["Wanderer", x...], "."))
 
-ARG = MQuerySymbol("ARG") # we just need limited mangled symbols here.
-TYPE_ROOT = MQuerySymbol("TYPE_ROOT")
+ARG = WandererSymbol("ARG") # we just need limited mangled symbols here.
+TYPE_ROOT = WandererSymbol("TYPE_ROOT")
 
-IN_TYPES = MQuerySymbol("IN", "TYPES")
-IN_FIELDS = MQuerySymbol("IN", "FIELDS")
-IN_SOURCE = MQuerySymbol("IN", "SOURCE")
+IN_TYPES = WandererSymbol("IN", "TYPES")
+IN_FIELDS = WandererSymbol("IN", "FIELDS")
+IN_SOURCE = WandererSymbol("IN", "SOURCE")
 
-OUT_TYPES = MQuerySymbol("OUT", "TYPES")
-OUT_FIELDS = MQuerySymbol("MQuery", "OUT.FIELDS")
-OUT_SOURCE = MQuerySymbol("MQuery", "OUT.SOURCE")
-RECORD = MQuerySymbol("RECORD")
+OUT_TYPES = WandererSymbol("OUT", "TYPES")
+OUT_FIELDS = WandererSymbol("Wanderer", "OUT.FIELDS")
+OUT_SOURCE = WandererSymbol("Wanderer", "OUT.SOURCE")
+RECORD = WandererSymbol("RECORD")
 
-N = MQuerySymbol("N")
-GROUPS = MQuerySymbol("GROUPS")
-GROUP_KEY = MQuerySymbol("GROUP_KEY")
+N = WandererSymbol("N")
+GROUPS = WandererSymbol("GROUPS")
+GROUP_KEY = WandererSymbol("GROUP_KEY")
 
-FN = MQuerySymbol("FN")
-FN_RETURN_TYPES = MQuerySymbol("FN", "RETURN_TYPES")
-FN_OUT_FIELDS = MQuerySymbol("FN", "OUT_FIELDS")
+FN = WandererSymbol("FN")
+FN_RETURN_TYPES = WandererSymbol("FN", "RETURN_TYPES")
+FN_OUT_FIELDS = WandererSymbol("FN", "OUT_FIELDS")
 
-AGG = MQuerySymbol("AGG")
-AGG_TYPES = MQuerySymbol("AGG", "TYPES")
+AGG = WandererSymbol("AGG")
+AGG_TYPES = WandererSymbol("AGG", "TYPES")
 
 _gen_sym_count = 0
 function gen_sym()
     global _gen_sym_count
-    let sym = MQuerySymbol("TMP", _gen_sym_count)
+    let sym = WandererSymbol("TMP", _gen_sym_count)
         _gen_sym_count = _gen_sym_count  + 1
         sym
     end
@@ -34,5 +34,5 @@ end
 
 function gen_sym(a :: Union{Symbol, Int, String})
     global _gen_sym_count
-    MQuerySymbol("Symbol", a)
+    WandererSymbol("Symbol", a)
 end

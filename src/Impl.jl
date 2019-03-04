@@ -198,8 +198,8 @@ function generate_select(args :: AbstractArray)
                         nothing
                     end
                 end
-           :($a => $new_field) || a && Do(new_field = Symbol(string(a))) =>
-                let new_value = visit(a)
+           :($a => $new_field) || a && Do(new_field = string(a)) =>
+                let new_value = visit(a), new_field = Symbol(new_field)
                     push!(fn_return_fields, QuoteNode(new_field))
                     push!(fn_return_elts, new_value)
                     nothing
@@ -235,8 +235,8 @@ function generate_groupby(args :: AbstractArray, having_args :: Union{Nothing, A
 
     foreach(args) do arg
         @match arg begin
-            :($b => $a) || b && Do(a = Symbol(string(b))) =>
-                let field = a
+            :($b => $a) || b && Do(a = string(b)) =>
+                let field = Symbol(a)
                     push!(group_fn_return_vars, a)
                     push!(group_fn_return_elts, visit_group_fn(b))
                     nothing
@@ -246,7 +246,7 @@ function generate_groupby(args :: AbstractArray, having_args :: Union{Nothing, A
 
     cond_expr = having_args === nothing ? nothing :
         let cond =
-            foldl(having_args) do last, arg
+            foldl(having_args, init=true) do last, arg
                 Expr(:&&, last, visit_having(arg))
             end
 
