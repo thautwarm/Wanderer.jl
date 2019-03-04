@@ -21,7 +21,8 @@ df = DataSource |>
        @groupby _."a + b + c" / _.a => key,
        @having key != 4.5,
        @orderby _.a |> length,
-       @select sum(_."a + b + c") => sum, _.key => key
+       @select sum(_."a + b + c") => sum, _.key => key,
+       @limit 2
 ```
 outputs:
 ```julia
